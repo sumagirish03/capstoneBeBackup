@@ -3,21 +3,6 @@ require 'bcrypt'
 class AccountController < ApplicationController
     skip_before_action :verify_authenticity_token
 
-    def index
-        render json: Account.all
-    end
-
-    def create
-        Account.create(
-            'email': params[:email],
-            'password': params[:password],
-            'phone_number': params[:phone_number],
-            'creationDate': params[:creationDate],
-            'userType': params[:userType]
-        )
-
-        render json: { :success => true }
-    end
     def update
         current_user = Account.find(params[:id])
 
@@ -35,6 +20,19 @@ class AccountController < ApplicationController
 
         render json: { :success => true, :message => "Updated account successfully." }
     end
+
+    def create
+        Account.create(
+            'email': params[:email],
+            'password': params[:password],
+            'phone_number': params[:phone_number],
+            'creationDate': params[:creationDate],
+            'userType': params[:userType]
+        )
+
+        render json: { :success => true }
+    end
+
     def destroy
         user = Account.find(params[:id])
         user.destroy

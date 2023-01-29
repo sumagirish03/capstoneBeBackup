@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
     def landing
-        render html: "Capstone Project DB"
+        render html: "Hello!"
     end
 end
